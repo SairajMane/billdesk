@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=0.9, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="icon" href="img/logo.svg" />
+    <title>BillDesk</title>
+  </head>
+
+  <body onload="checkScreenWidthProceed()" onresize="checkScreenWidthProceed()">
+    <!-- Modals -->
+    <section id="modal-parent">
+      <div id="modal">
+        <div class="modal-head">
+          <p id="modal-title">About us</p>
+          <svg
+            width="38"
+            height="38"
+            viewBox="0 0 38 38"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            id="modal-close-button"
+            onclick="closeModal()"
+          >
+            <path
+              d="M22.7929 15.1919L15.2056 22.7792"
+              stroke="#130F26"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M22.7953 22.7838L15.2017 15.1886"
+              stroke="#130F26"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M25.863 4.35449H12.1371C7.35381 4.35449 4.35498 7.74124 4.35498 12.534V25.4667C4.35498 30.2594 7.33956 33.6462 12.1371 33.6462H25.8614C30.6605 33.6462 33.6466 30.2594 33.6466 25.4667V12.534C33.6466 7.74124 30.6605 4.35449 25.863 4.35449Z"
+              stroke="#130F26"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <p id="modal-text">
+          We are beginners in developers community and enthusiasts in web
+          development. This mini web based software is developed as the
+          academics’ microproject, coming up with the realtime application of
+          javascript under the Guidance of <strong> S. P. Emekar</strong>. Your
+          feedbacks are awaited...
+        </p>
+        <p id="modal-team-name">Team BillDesk</p>
+      </div>
+    </section>
+
+    <section id="web-hider">
+      <p><strong>Sorry, your screen size is too small to access this site ! </strong><br><small> Try switching to the full screen or Desktop mode</small></p>
+    </section>
+    <!-- Hidden item row -->
+      <div id="itemDummyParent">
+        <div class="item" id="item-id" style="position: absolute; top: -1500px; left: -1500px;">
+          <img src="img/Bag.svg" id="item-img"/>
+
+          <div class="item-product-name-category" id="item-product-name-category-id">
+            <p id="item-product-name-id" class="item-product-name"></p>
+            <p id="item-category-id" class="item-category"></p>
+          </div>
+
+          <p id="item-quantity-id" class="item-quantity"></p>
+
+          <p id="item-total-price-id" class="item-total-price"></p>
+        </div>
+      </div> 
+
+    <!-- Navigation Bar -->
+    <nav id="navigation-bar">
+      <div id="navbar-content">
+        <div class="logo">
+          <img src="img/logo-with-text.svg" alt="BillDesk" />
+        </div>
+        <div class="nav-options">
+          <ul>
+            <li onclick="modalDataManage(0)">Services</li>
+            <li onclick="modalDataManage(1)">Developers</li>
+            <li onclick="modalDataManage(2)">About us</li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Bottom views parent -->
+    <section class="parent-for-all-views">
+      <!-- landing-view-section -->
+      <section class="landing-view" id="landing-view">
+        <p class="landing-view-head">
+          <span style="color: #2990ef">Calculate</span> your bills <br />easily
+          with us
+        </p>
+        <p class="landing-view-subhead">
+          Enter merchant details below and get started
+        </p>
+        <input
+          type="text"
+          name="landing-view-merchant-name"
+          id="landing-view-merchant-name"
+          maxlength="50"
+          placeholder="Merchant name"
+          tabindex="1"
+          class="focused-input"
+        />
+        <br />
+        <input
+          type="text"
+          name="landing-view-category-name"
+          id="landing-view-category-name"
+          maxlength="30"
+          placeholder="Category"
+          tabindex="2"
+          class="focused-input"
+        />
+        <div class="landing-view-buttons">
+          <button
+            type="submit"
+            id="get-started-btn"
+            onclick="validateAndSetMerchant()"
+          >
+            Get started
+          </button>
+          <button
+            type="submit"
+            id="privacy-policies"
+            onclick="modalDataManage(3)"
+          >
+            Privacy Policies
+          </button>
+        </div>
+      </section>
+
+      <!-- compute-view-section -->
+      <section id="BillDesk-Compute">
+        <div id="merchant-nd-category">
+          <p>
+            <span class="bold-text">Merchant&nbsp;: </span> &nbsp;<span
+              id="merchant-name"
+              >Merchant name</span
+            >
+          </p>
+          <p>
+            <span class="bold-text">Category&nbsp;: </span> &nbsp;<span
+              id="category-name"
+              >Category</span
+            >
+          </p>
+        </div>
+
+        <div class="customer-details">
+          <div class="customer-details-head">
+            <h1>Customer details</h1>
+            <button
+              type="submit"
+              class="submit-customer-details"
+              id="new-customer"
+              disabled="true"
+              onclick="newCustomer()"
+            >
+              New Customer
+            </button>
+          </div>
+
+          <div class="customer-details-bottom">
+            <input
+              type="text"
+              name="customer-name"
+              id="customer-name-input"
+              placeholder="Customer name"
+              tabindex="1"
+              class="focused-input"
+            />
+            <input
+              type="number"
+              id="customer-phone"
+              maxlength="10"
+              placeholder="Phone number"
+              tabindex="2"
+              class="focused-input"
+            />
+            <button
+              type="submit"
+              id="btn-submit-customer-details"
+              tabindex="3"
+              onclick="validateAndSetCustomer()"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+
+        <div class="product-cart-parent" id="product-cart-parent">
+          <div class="product-details">
+            <p id="product-details-head">Product details</p>
+            <input
+              type="text"
+              name="product-name"
+              id="product-name"
+              maxlength="30"
+              placeholder="Product name"
+              tabindex="4"
+              class="focused-input"
+              onfocus="checkNdHideReceipt()"
+            />
+            <input
+              type="text"
+              name="product-category"
+              id="product-category"
+              maxlength="20"
+              placeholder="Product category"
+              tabindex="5"
+              class="focused-input"
+              onfocus="checkNdHideReceipt()"
+            />
+            <input
+              type="number"
+              name="product-price"
+              id="product-price"
+              maxlength="20"
+              placeholder="Price"
+              tabindex="6"
+              class="focused-input"
+              onfocus="checkNdHideReceipt()"
+            />
+            <input
+              type="number"
+              name="product-quantities"
+              id="product-quantities"
+              maxlength="3"
+              placeholder="Quantities"
+              tabindex="7"
+              class="focused-input"
+              value="1"
+              onfocus="checkNdHideReceipt()"
+              onkeydown="checkIfEnterPressed(event)"
+            />
+            <div class="product-details-buttons">
+              <button
+                id="add-to-cart-button"
+                type="submit"
+                onclick="addProductToCart()"
+              >
+                <p>Add to cart</p>
+                <img src="img/adc_icon.svg" height="20" />
+              </button>
+              <button id="reset-all-button" type="submit" onclick="resetProductDetails()">Reset all</button>
+            </div>
+          </div>
+
+          <div class="product-cart" id="product-cart">
+            <div class="cart-parent" id="cart-parent">
+              <div class="cart-head">
+                <p>Cart</p>
+                <button
+                  type="submit"
+                  id="remove-all-cart-items"
+                  class="cart-btn-new-customer"
+                  onclick="emptyCart(1)"
+                >
+                  Remove all
+                </button>
+              </div>
+
+              <div class="cart-items">
+                <table id="cart-items-table">
+                  <colgroup>
+                    <col style="width: 100%" />
+                  </colgroup>
+                  <tbody id="cart-items-table-tbody">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="empty-cart" id="empty-cart">
+              <img src="img/172552_shopping_cart_empty_icon.svg" />
+              <p>Cart is empty</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Printable receipt -->
+      <section id="receipt-view">
+        <div id="receipt-view-head">
+          <p>Shopping Receipt</p>
+          <button type="submit" onclick="printReceipt();">Print Reciept</button>
+        </div>
+        <div id="receipt">
+          <div id="receipt-head">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              id="receipt-icon"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M20.8333 23.82C23.0185 23.82 24.7907 22.049 24.7918 19.8638V19.8615V16.7115C23.3487 16.7115 22.1797 15.5425 22.1785 14.0993C22.1785 12.6573 23.3475 11.4871 24.7907 11.4871H24.7918V8.33712C24.7942 6.15079 23.0243 4.37746 20.8392 4.37512H20.8322H7.16816C4.98183 4.37512 3.20966 6.14612 3.2085 8.33246V8.33362V11.5886C4.6015 11.5396 5.76933 12.6293 5.81833 14.0223C5.8195 14.048 5.82066 14.0736 5.82066 14.0993C5.82183 15.5401 4.65633 16.7091 3.2155 16.7115H3.2085V19.8615C3.20733 22.0466 4.9795 23.82 7.16466 23.82H7.16583H20.8333Z"
+                stroke="#2990EF"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M14.4331 10.5736L15.1518 12.0285C15.2218 12.1708 15.3571 12.27 15.5146 12.2933L17.1211 12.5278C17.5189 12.5861 17.6764 13.0738 17.3894 13.3526L16.2274 14.4843C16.1131 14.5951 16.0618 14.755 16.0874 14.9125L16.3616 16.5108C16.4293 16.9063 16.0151 17.2073 15.6604 17.0206L14.2243 16.2658C14.0831 16.1911 13.9151 16.1911 13.7739 16.2658L12.3389 17.0206C11.9831 17.2073 11.5689 16.9063 11.6366 16.5108L11.9108 14.9125C11.9376 14.755 11.8851 14.5951 11.7708 14.4843L10.6099 13.3526C10.3229 13.0738 10.4804 12.5861 10.8771 12.5278L12.4836 12.2933C12.6411 12.27 12.7776 12.1708 12.8476 12.0285L13.5651 10.5736C13.7424 10.2143 14.2558 10.2143 14.4331 10.5736Z"
+                stroke="#2990EF"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <div id="receipt-head-merchant-category">
+              <p id="receipt-head-merchant">Merchant name</p>
+              <p id="receipt-head-category">Category</p>
+            </div>
+            <div class="receipt-head-vacant"></div>
+            <p id="date-time">DD/MM/YYYY - HH:MM:SS</p>
+          </div>
+
+          <div class="receipt-customer-name-contact">
+            <p>
+              <span id="title">Customer name :&nbsp;</span
+              ><span id="customer-name"></span>
+            </p>
+            <p>
+              <span id="title"
+                >|&nbsp;&nbsp;&nbsp;&nbsp;Phone number :&nbsp;</span
+              ><span id="customer-phone-number"></span>
+            </p>
+          </div>
+
+          <table style="table-layout: fixed; width: 876px" id="receipt-table">
+            <colgroup>
+              <col style="width: 328.5‬px" />
+              <col style="width: 180.5px" />
+              <col style="width: 149px" />
+              <col style="width: 219px" />
+            </colgroup>
+            <thead>
+
+            </thead>
+            <tbody>
+              <tr id="receipt-table-header-row">
+                <th>Product name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Payable Amount</th>
+              </tr>
+              <tr>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="receipt-total-div">
+            <p>
+              Total payable amount :&nbsp;<span id="receipt-total-amount"
+                ></span
+              >
+            </p>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <nav class="bottom-nav" id="bottom-nav">
+      <div class="bottom-nav-child">
+        <p>Total payable amount :&nbsp;<span id="total-amount"></span></p>
+        <div class="bottom-nav-child-buttons-parent">
+          <button
+            type="submit"
+            id="btn-show-receipt"
+            class="bottom-nav-child-button"
+            onclick="showReceipt()"
+          >
+            Show receipt
+          </button>
+          <button
+            type="submit"
+            id="new-customer"
+            class="bottom-nav-child-button new-customer"
+            onclick="newCustomer()"
+          >
+            New customer
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <script src="js/index.js" type="text/javascript"></script>
+  </body>
+</html>
