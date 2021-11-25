@@ -225,7 +225,12 @@ function addProductToCart() {
         const itemTemp = Object.create(item);
         itemTemp.productName=tempProductName;
         itemTemp.category=tempCategory;
-        itemTemp.quantity=tempQuantities;
+        if (tempQuantities<=0) {
+            itemTemp.quantity=1;
+        }
+        else{
+            itemTemp.quantity=tempQuantities;
+        }
         itemTemp.priceForOne=tempPriceForOne;
         if (itemTemp.priceForOne>=0) {
             //Add temp element to cart
@@ -430,6 +435,8 @@ function renderTotal() {
     bottomNavBarTotal.innerText=total;
     receiptTotal.innerText=total;
 }
+//Allow editing customer name & category
+
 //Check screen width and proceed
 function checkScreenWidthProceed() {
     var contentHiderSec = document.getElementById('web-hider');

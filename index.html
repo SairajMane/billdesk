@@ -72,6 +72,7 @@
     <section id="web-hider">
       <p><strong>Sorry, your screen size is too small to access this site ! </strong><br><small> Try switching to the full screen or Desktop mode</small></p>
     </section>
+
     <!-- Hidden item row -->
       <div id="itemDummyParent">
         <div class="item" id="item-id" style="position: absolute; top: -1500px; left: -1500px;">
@@ -106,6 +107,7 @@
 
     <!-- Bottom views parent -->
     <section class="parent-for-all-views">
+
       <!-- landing-view-section -->
       <section class="landing-view" id="landing-view">
         <p class="landing-view-head">
@@ -191,6 +193,7 @@
               placeholder="Customer name"
               tabindex="1"
               class="focused-input"
+              ondblclick="allowEditingCnameCateg(this)"
             />
             <input
               type="number"
@@ -199,6 +202,7 @@
               placeholder="Phone number"
               tabindex="2"
               class="focused-input"
+              ondblclick="allowEditingCnameCateg(this)"
             />
             <button
               type="submit"
@@ -390,6 +394,7 @@
       </section>
     </section>
 
+    <!-- Bottom navigation-bar -->
     <nav class="bottom-nav" id="bottom-nav">
       <div class="bottom-nav-child">
         <p>Total payable amount :&nbsp;<span id="total-amount"></span></p>
