@@ -1,7 +1,9 @@
 var modal = document.getElementById('modal');
 var modalParent = document.getElementById('modal-parent');
 var modalTitle = document.getElementById('modal-title');
+modalTitle.innerHTML="";
 var modalText = document.getElementById('modal-text');
+modalText.innerHTML="";
 var modalCloseButton = document.getElementById('modal-close-button');
 var bottomNavBar = document.getElementById('bottom-nav');
 var computeSection = document.getElementById('BillDesk-Compute');
@@ -21,6 +23,7 @@ var cartTable = document.getElementById('cart-items-table');
 //Boolean for storing reset warning permission status
 var emptyCartPermission = false;
 var newCustomerPermission = false;
+var isMerchantAutoFilled = false;
 
 var item = {
     productName:"",
@@ -35,7 +38,6 @@ let items = new Array(item);
 
 //disable right click
 document.addEventListener('contextmenu', event => event.preventDefault());
-
 //Disable opening developers menu for security
  document.onkeydown = function(e) {
      if(event.keyCode == 123) {
@@ -54,16 +56,20 @@ document.addEventListener('contextmenu', event => event.preventDefault());
         return false;
      }
 }
-
 function openModal() {
-    modalParent.style.display="flex";
-    modalParent.style.animationName="openModalBackground";
-    modal.style.animationName="openModal";
+    if (modalTitle.innerHTML!=""&& modalText.innerHTML!="") {
+        modalParent.style.display="flex";
+        modalParent.style.animationName="openModalBackground";
+        modal.style.animationName="openModal";
+    }
 }
 function closeModal() {
     modalParent.style.animationName="closeModalBackground";
     modal.style.animationName="closeModal";
-    setTimeout(function(){ modalParent.style.display="none" }, 200);
+    setTimeout(function(){ modalParent.style.display="none";
+    modalTitle.innerText="";
+    modalText.innerHTML=""; }, 200);
+    document.getElementById('modal').style.backgroundColor="#ffffff";
 }
 function modalDataManage(opNnum) {
     switch (opNnum) {
@@ -85,6 +91,11 @@ function modalDataManage(opNnum) {
         case 3:
             modalTitle.innerHTML="Privacy Policies"
             modalText.innerHTML="Billdesk is an open source software for calculating the billing amounts at merchant side. It is strictly recommended to be implementted for fair use only. All rights are reserved by the developers."
+            break;
+        case 4:
+            modalTitle.innerHTML="Feedback"
+            modalText.innerHTML='<iframe id="feedback-form-frame"src="https://forms.gle/vdcoNRJvWwgTT9BJ6" width="450" height="450" frameborder="0" marginheight="0" marginwidth="0" ">Loading…</iframe>';
+            document.getElementById('modal').style.backgroundColor="#F6F6F6";
             break;
     }
     openModal()
@@ -112,6 +123,11 @@ function validateAndSetMerchant() {
         document.getElementById('category-name').innerHTML=category;
         document.getElementById('receipt-head-category').innerHTML=category;
 
+            //Save merchant details to Cookies
+            if (isMerchantAutoFilled==false) {
+                saveMerchantDetails("mname",""+merchant,365);
+                saveMerchantDetails("mcat",""+category,365);
+            }
         //Show customer details view
         showComputeSection();
         computeSection.scrollIntoView({ behavior: 'smooth', block:'start' });
@@ -128,6 +144,43 @@ function validateAndSetMerchant() {
         category="";
     }
 }
+//Save Merchant details to cookie
+function saveMerchantDetails(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+//Retrieve Merchant details from cookie and set it to
+function getMerchantDetails() {
+    var merchant = getCookie("mname");
+    var category = getCookie("mcat");
+    if (merchant!=""&&category!="") {
+        document.getElementById('landing-view-merchant-name').value=merchant;
+        document.getElementById('landing-view-category-name').value=category;
+        isMerchantAutoFilled=true;
+    }
+    else {
+        isMerchantAutoFilled=false;
+    }
+}
+//Standard cookie retreive function by W3SCHooLs
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+//Make compute section visible
 function showComputeSection() {
     computeSection.style.display="block";
 }
@@ -446,4 +499,5 @@ function checkScreenWidthProceed() {
     else {
         contentHiderSec.style.display='none';
     }
+    getMerchantDetails();
 }
