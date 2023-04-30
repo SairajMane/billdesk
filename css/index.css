@@ -535,8 +535,7 @@ li:hover {
 /* Product details and cart section*/
 .product-cart-parent {
   margin-top: 24px;
-  /* display--none */
-  display: none;
+  display:none;
   align-items: center;
 }
 
@@ -881,7 +880,7 @@ tbody tr td {
 
 /* new cart layout styling */
 
-#item-img {
+.item-img {
   height: 60px;
   width: 60px;
   padding: 17px;
@@ -907,7 +906,7 @@ tbody tr td {
   height: 100%;
 }
 .item-product-name-category {
-  width: 240px;
+  width: 220px;
   margin-right: 20px;
   text-align: left;
 }
@@ -924,7 +923,7 @@ tbody tr td {
   content: " pcs";
 }
 .item-total-price {
-  width: 177px;
+  width: 125px;
   text-align: center;
   font-weight: 600;
   color: #1ef81a;
@@ -957,4 +956,9 @@ tbody tr td {
   #web-hider {
     font-size: 22px;
   }
+}
+
+.remove-item-btn:hover{
+  background: rgb(255, 190, 190);
+  cursor: pointer;
 }

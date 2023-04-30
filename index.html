@@ -70,24 +70,42 @@
     </section>
 
     <section id="web-hider">
-      <p><strong>Sorry, your screen size is too small to access this site ! </strong><br><small> Try switching to the full screen or Desktop mode</small></p>
+      <p>
+        <strong
+          >Sorry, your screen size is too small to access this site ! </strong
+        ><br /><small> Try switching to the full screen or Desktop mode</small>
+      </p>
     </section>
 
     <!-- Hidden item row -->
-      <div id="itemDummyParent">
-        <div class="item" id="item-id" style="position: absolute; top: -1500px; left: -1500px;">
-          <img src="img/Bag.svg" id="item-img"/>
-
-          <div class="item-product-name-category" id="item-product-name-category-id">
-            <p id="item-product-name-id" class="item-product-name"></p>
-            <p id="item-category-id" class="item-category"></p>
-          </div>
-
-          <p id="item-quantity-id" class="item-quantity"></p>
-
-          <p id="item-total-price-id" class="item-total-price"></p>
+    <div id="itemDummyParent">
+      <div
+        class="item"
+        id="item-id"
+        style="position: absolute; top: -1500px; left: -1500px"
+      >
+        <img src="img/Bag.svg" class="item-img" />
+        <div
+          class="item-product-name-category"
+          id="item-product-name-category-id"
+        >
+          <p id="item-product-name-id" class="item-product-name"></p>
+          <p id="item-category-id" class="item-category"></p>
         </div>
-      </div> 
+        <p id="item-quantity-id" class="item-quantity"></p>
+        <p id="item-total-price-id" class="item-total-price"></p>
+        <img
+          src="img/minus.svg"
+          alt="Remove Item"
+          class="item-img remove-item-btn"
+          id="item-remove-id"
+          clickable
+          focusable
+          data-itemno=""
+          onclick="removeProductFromCart(this.getAttribute('data-itemno'))"
+        />
+      </div>
+    </div>
 
     <!-- Navigation Bar -->
     <nav id="navigation-bar">
@@ -108,7 +126,6 @@
 
     <!-- Bottom views parent -->
     <section class="parent-for-all-views">
-
       <!-- landing-view-section -->
       <section class="landing-view" id="landing-view">
         <p class="landing-view-head">
@@ -270,7 +287,13 @@
                 <p>Add to cart</p>
                 <img src="img/adc_icon.svg" height="20" />
               </button>
-              <button id="reset-all-button" type="submit" onclick="resetProductDetails()">Reset all</button>
+              <button
+                id="reset-all-button"
+                type="submit"
+                onclick="resetProductDetails()"
+              >
+                Reset all
+              </button>
             </div>
           </div>
 
@@ -293,8 +316,7 @@
                   <colgroup>
                     <col style="width: 100%" />
                   </colgroup>
-                  <tbody id="cart-items-table-tbody">
-                  </tbody>
+                  <tbody id="cart-items-table-tbody"></tbody>
                 </table>
               </div>
             </div>
@@ -369,9 +391,7 @@
               <col style="width: 149px" />
               <col style="width: 219px" />
             </colgroup>
-            <thead>
-
-            </thead>
+            <thead></thead>
             <tbody>
               <tr id="receipt-table-header-row">
                 <th>Product name</th>
@@ -379,16 +399,15 @@
                 <th>Quantity</th>
                 <th>Payable Amount</th>
               </tr>
-              <tr>
-              </tr>
+              <tr></tr>
             </tbody>
           </table>
 
           <div class="receipt-total-div">
             <p>
-              Total payable amount :&nbsp;<span id="receipt-total-amount"
-                ></span
-              >
+              Total payable amount :&nbsp;<span
+                id="receipt-total-amount"
+              ></span>
             </p>
           </div>
         </div>
