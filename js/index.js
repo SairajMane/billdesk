@@ -38,18 +38,6 @@ var item = {
 let itemTemp;
 let items = new Array(item);
 
-// Testing Area
-function addDummyItems() {
-  let t = 10;
-  while (t--) {
-    document.querySelector("#product-name").value = "1";
-    document.querySelector("#product-category").value = "CAT";
-    document.querySelector("#product-price").value = "1";
-    addProductToCart();
-  }
-}
-addDummyItems();
-
 //disable right click
 document.addEventListener("contextmenu", (event) => event.preventDefault());
 //Disable opening developers menu for security
@@ -332,12 +320,11 @@ function removeProductFromCart(itemno) {
   //reset text boxes for next products
   resetProductDetails();
   //document.getElementById('product-name').focus;
-  if(items.length == 1) {
+  if (items.length == 1) {
     manageEmptyCartOverlayVisibility(true);
     manageCartVisibility(false);
     manageBottomNavBarVisibility(false);
-  }
-  else {
+  } else {
     manageEmptyCartOverlayVisibility(false);
   }
   renderTotal();
